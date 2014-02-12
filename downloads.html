@@ -133,7 +133,7 @@
                         datos2 += '<h3 id="nombreArticulo" class="nombreArticulo">' + data[index].nombreArticulo + '</h3><br><h3 id="precioArticulo" class="precioArticulo" >' + data[index].precioArticulo + '&euro;</h3>';
                         datos2 += '<fieldset class="val-fieldset estrellaArticulos"><legend>Calificación:</legend><span class="valoracion val-40"></span></fieldset><p></p>';
                         datos2 += '<div class="box descripcionArticulo"><h3 style="padding-top:15px;padding-left:15px;">Descripcion</h3><p style="padding:20px;">' + data[index].descripcionArticulo + '</p></div>';
-                        datos2 += '<a href="#"><a class="button" href=javascript:articulo_nuevo(' + data[index].idArticulo + ')>Añadir al carrito</a><a class="button" href="javascript:articulos(' + idCategorias + ')">Volver</a><a class="button" href="javascript:ver_articulos()">verarticulos</a><img src="./images/slider/' + data[index].nombreArticulo.toLowerCase() + '.jpg" id="imagen_unarticulo"></img></a>';
+                        datos2 += '<a href="#"><a class="button" href=javascript:articulo_nuevo(' + data[index].idArticulo + ')>Añadir al carrito</a><a class="button" href="javascript:articulos(' + idCategorias + ')">Volver</a><a class="button" href="javascript:mandar_carrito()">comprar</a><a class="button" href=javascript:ver_articulos()>Ver json</a><img src="./images/slider/' + data[index].nombreArticulo.toLowerCase() + '.jpg" id="imagen_unarticulo"></img></a>';
                         datos2 += '</div></div></div></article>';
                     });
                     datos2 += '';
@@ -170,16 +170,16 @@
         };
 // ver los articulos del carrito y el total: verarticulos()
         Carrito.prototype.verarticulos = function() {
-            mensaje = "Numero: " + this.numero + "  Fecha de Creacion: " + this.fechaCreacion + "  Nº de articulos:" + this.listaArticulos.length + "\n ARTICULOS:";
-            totalPrecio = 0;
-            for (i = 0; i < this.listaArticulos.length; i++) {
-                mensaje += "\n id " + this.listaArticulos[i].id + "|| nombre " + this.listaArticulos[i].nombre + "|| Precio: " + this.listaArticulos[i].precio + "|| Unidades: " + this.listaArticulos[i].unidades;
-                totalUnidades = parseFloat(this.listaArticulos[i].precio) * parseInt(this.listaArticulos[i].unidades);
-                totalPrecio += totalUnidades;
-            }
+            //mensaje = "Numero: " + this.numero + "  Fecha de Creacion: " + this.fechaCreacion + "  Nº de articulos:" + this.listaArticulos.length + "\n ARTICULOS:";
+            //totalPrecio = 0;
+            //for (i = 0; i < this.listaArticulos.length; i++) {
+                //mensaje += "\n id " + this.listaArticulos[i].id + "|| nombre " + this.listaArticulos[i].nombre + "|| Precio: " + this.listaArticulos[i].precio + "|| Unidades: " + this.listaArticulos[i].unidades;
+                //totalUnidades = parseFloat(this.listaArticulos[i].precio) * parseInt(this.listaArticulos[i].unidades);
+              //  totalPrecio += totalUnidades;
+           // }
             //carrito.listaArticulos.lenght;
-            mensaje += "\n TOTAL " + totalPrecio + "€";
-            alert(mensaje);
+            //mensaje += "\n TOTAL " + totalPrecio + "€";
+            //alert(mensaje);
         };
 
 //guardar carrito en variable de sesion
@@ -212,21 +212,20 @@
         function ver_articulos() {
             carrito.verarticulos();
 // llamada al metodo del objeto carrito para ver los articulos y el total
-            //alert(JSON.stringify(carrito));
+            alert(JSON.stringify(carrito));
         }
         ;
 
         function mandar_carrito() {
             carrito1 = JSON.stringify(carrito);
-            //alert(carrito1);
-
+            alert(carrito1);
             $.ajax({
-                //dataType: 'json',
+                dataType: 'json',
                 type: 'POST',
                 url: 'php/carrito.php',
-                data: 'carrito=' + carrito1,
+                data: 'datos=' + carrito1,
                 success: function(data) {
-                    alert(data);
+                    alert("insertado");
                 }
             });
         }
