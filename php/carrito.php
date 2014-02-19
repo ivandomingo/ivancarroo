@@ -9,7 +9,7 @@ $listaArticulos = $carrito->listaArticulos;//guardamos la lista de articulos del
 
 //insertar un pedido
 // idPedido,Fecha,Usuario,Estado,PrecioTotal
-$db=mysql_connect("localhost","root","") or die("Connection Error".mysql_error());
+$db=mysql_connect("localhost","root","frodo2013") or die("Connection Error".mysql_error());
 mysql_select_db("proyecto1_tienda_servidor") or die("Error Connection to DB".mysql_error());
 
 $SQL = "INSERT INTO `proyecto1_tienda_servidor`.`pedidos` 
@@ -34,4 +34,6 @@ $SQL2 = "INSERT INTO `proyecto1_tienda_servidor`.`detallepedidos`
 $result2=mysql_query($SQL2) or die("Couldnt execute query.".mysql_error());
 }
 //select max(idpedido) as maximo from pedidos where idusuario = idusuario;
+
+
 ?>
